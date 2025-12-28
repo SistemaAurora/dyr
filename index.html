@@ -24,6 +24,7 @@
             color: var(--text-main);
             scroll-behavior: smooth;
             -webkit-tap-highlight-color: transparent;
+            overflow-x: hidden;
         }
 
         .section-beige {
@@ -56,11 +57,11 @@
             }
         }
 
-        /* Estilos del Slider */
+        /* Slider Styles */
         .slider-container {
             position: relative;
             overflow: hidden;
-            border-radius: 2rem;
+            border-radius: 1.5rem;
         }
 
         .slider-wrapper {
@@ -75,9 +76,9 @@
         }
 
         .dot {
-            height: 8px;
-            width: 8px;
-            margin: 0 4px;
+            height: 6px;
+            width: 6px;
+            margin: 0 3px;
             background-color: #cbd5e1;
             border-radius: 50%;
             display: inline-block;
@@ -85,20 +86,21 @@
         }
 
         .dot.active {
-            width: 24px;
+            width: 18px;
             border-radius: 4px;
             background-color: var(--gold-primary);
         }
 
         .option-card {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 100%;
         }
 
         .option-card.selected {
             border: 3px solid var(--gold-primary);
             background: white;
-            transform: scale(1.04);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
             z-index: 10;
         }
 
@@ -112,7 +114,7 @@
             }
 
             50% {
-                transform: translateY(-12px);
+                transform: translateY(-10px);
             }
 
             100% {
@@ -120,15 +122,20 @@
             }
         }
 
+        /* CORRECCIÓN FINAL: Centrado absoluto robusto */
         #sticky-buy {
             display: none;
             position: fixed;
             bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
+            left: 0;
+            right: 0;
+            margin-left: auto;
+            margin-right: auto;
             width: 90%;
             max-width: 400px;
-            z-index: 100;
+            z-index: 9999;
+            box-sizing: border-box;
+            text-align: center;
         }
 
         .shake-on-select {
@@ -150,31 +157,66 @@
                 transform: translateX(5px);
             }
         }
+
+        .badge-shipping {
+            background: #2563eb;
+            color: white;
+            font-size: 9px;
+            font-weight: 900;
+            padding: 3px 10px;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Optimizaciones para campos de entrada en iOS */
+        input,
+        select {
+            font-size: 16px !important;
+            /* Evita zoom automático en iPhone */
+        }
     </style>
 </head>
 
-<body class="min-h-screen pb-20">
+<body class="min-h-screen pb-24">
 
-    <!-- Barra de Urgencia -->
+    <!-- Barra de Urgencia & Confianza -->
     <div
-        class="bg-black text-white py-2.5 text-center text-[10px] font-bold uppercase tracking-[0.2em] px-4 sticky top-0 z-50">
+        class="bg-black text-white py-2 text-center text-[9px] font-bold uppercase tracking-[0.15em] px-4 sticky top-0 z-50">
         ⌛ OFERTA EXCLUSIVA: SÓLO POR LAS PRÓXIMAS 2 HORAS
     </div>
 
     <!-- Hero Section -->
-    <header class="pt-8 pb-12 px-6 text-center max-w-lg mx-auto">
-        <div
-            class="inline-block px-4 py-1 rounded-full bg-gold-primary/10 text-gold-dark text-[10px] font-black uppercase tracking-widest mb-4">
-            Tecnología de Levitación 2025
+    <header class="pt-6 pb-10 px-5 text-center max-w-lg mx-auto">
+        <!-- Confianza & Envío -->
+        <div class="flex flex-col gap-2 mb-6">
+            <div
+                class="flex items-center justify-center gap-2 bg-green-50 py-2 px-4 rounded-full border border-green-100">
+                <i class="fas fa-truck-fast text-green-600 text-xs"></i>
+                <span class="text-[9px] font-black text-green-700 uppercase tracking-wider">PAGO CONTRA-ENTREGA EN TODO
+                    LIMA</span>
+            </div>
+            <div
+                class="flex items-center justify-center gap-2 bg-blue-50 py-1.5 px-4 rounded-full border border-blue-100">
+                <i class="fas fa-bolt text-blue-600 text-[10px]"></i>
+                <span class="text-[8px] font-black text-blue-700 uppercase tracking-widest">ENVÍO VELOZ: LLEGA HOY O
+                    MAÑANA</span>
+            </div>
         </div>
-        <h1 class="text-4xl font-extrabold mb-4 leading-tight text-slate-900 tracking-tight">
-            Magia en tu Mesa: <span class="text-gold-primary">Lámpara Flotante</span>
-        </h1>
-        <p class="text-slate-500 text-sm mb-8 leading-relaxed">Cargador inalámbrico rápido y diseño anti-gravedad en una
-            sola pieza de lujo.</p>
 
-        <!-- Carrusel de 5 Imágenes -->
-        <div class="relative rounded-[2.5rem] overflow-hidden shadow-2xl mb-8 border-[6px] border-white bg-white p-2">
+        <div
+            class="inline-block px-4 py-1 rounded-full bg-gold-primary/10 text-gold-dark text-[9px] font-black uppercase tracking-widest mb-3">
+            Tecnología MagLev 2025
+        </div>
+        <h1 class="text-3xl font-extrabold mb-3 leading-tight text-slate-900 tracking-tight px-2">
+            Estación de Lujo <span class="text-gold-primary">Anti-Gravedad</span>
+        </h1>
+        <p class="text-slate-500 text-xs mb-8 leading-relaxed px-4">Multifuncional 2-en-1: Carga inalámbrica rápida y
+            soporte magnético que soporta hasta 1kg.</p>
+
+        <!-- Carrusel Optimizado -->
+        <div class="relative rounded-[2rem] overflow-hidden shadow-xl mb-8 border-[4px] border-white bg-white p-1.5">
             <div class="slider-container floating-animation">
                 <div class="slider-wrapper" id="slider">
                     <!-- Foto 1: Levitación principal -->
@@ -190,175 +232,247 @@
                 </div>
             </div>
 
-            <!-- Indicadores Dinámicos -->
-            <div class="flex justify-center mt-4 pb-2" id="dots">
-                <!-- Se generan vía JS -->
-            </div>
+            <div class="flex justify-center mt-3 pb-1" id="dots"></div>
 
             <div
-                class="absolute bottom-14 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-2xl shadow-lg flex items-center gap-2">
-                <span class="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
-                <span class="text-[10px] font-bold text-slate-700">18 personas compraron hoy</span>
+                class="absolute bottom-12 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-xl shadow-md flex items-center gap-2 border border-slate-100">
+                <span class="flex h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                <span class="text-[9px] font-bold text-slate-700">18 personas compraron hoy</span>
             </div>
         </div>
 
-        <button onclick="scrollToElement('precios')"
-            class="gold-button w-full text-white font-black py-5 rounded-2xl text-lg uppercase tracking-widest pulse-luxury mb-4 transition-transform active:scale-95">
-            ¡Obtener Descuento Ahora!
-        </button>
+        <div class="px-2">
+            <button onclick="scrollToElement('precios')"
+                class="gold-button w-full text-white font-black py-4 rounded-xl text-base uppercase tracking-widest pulse-luxury mb-4 transition-transform active:scale-95">
+                ¡Obtener Descuento Ahora!
+            </button>
+        </div>
 
-        <div class="flex items-center justify-center gap-4 mt-4">
-            <img src="https://www.plin.com.pe/wp-content/uploads/2021/01/logo-plin.png"
-                class="h-4 grayscale opacity-50">
-            <img src="https://logodownload.org/wp-content/uploads/2019/08/yape-logo.png"
-                class="h-4 grayscale opacity-50">
-            <span class="text-[10px] font-bold text-slate-400 uppercase">Pago Contra-Entrega</span>
+        <div class="flex items-center justify-center gap-4 mt-2">
+            <div class="flex flex-col items-center opacity-40">
+                <img src="https://www.plin.com.pe/wp-content/uploads/2021/01/logo-plin.png" class="h-3 grayscale">
+                <span class="text-[6px] font-bold uppercase mt-1">Plin</span>
+            </div>
+            <div class="flex flex-col items-center opacity-40">
+                <img src="https://logodownload.org/wp-content/uploads/2019/08/yape-logo.png" class="h-3 grayscale">
+                <span class="text-[6px] font-bold uppercase mt-1">Yape</span>
+            </div>
+            <span
+                class="text-[9px] font-bold text-slate-400 uppercase border-l pl-4 border-slate-300">Contra-Entrega</span>
         </div>
     </header>
 
-    <!-- Beneficios Rápidos -->
-    <section class="section-beige py-10 px-6">
-        <div class="max-w-md mx-auto grid grid-cols-2 gap-4">
-            <div class="bg-white p-4 rounded-3xl shadow-sm text-center">
-                <i class="fas fa-bolt text-gold-primary mb-2"></i>
-                <p class="text-[10px] font-bold uppercase">Carga Veloz</p>
-            </div>
-            <div class="bg-white p-4 rounded-3xl shadow-sm text-center">
-                <i class="fas fa-magic text-gold-primary mb-2"></i>
-                <p class="text-[10px] font-bold uppercase">Anti-Gravedad</p>
+    <!-- Multifuncionalidad -->
+    <section class="section-beige py-10 px-5">
+        <div class="max-w-md mx-auto">
+            <h2 class="text-lg font-black text-center mb-6 uppercase tracking-tighter">¿Por qué es la favorita?</h2>
+
+            <div class="grid grid-cols-1 gap-4">
+                <div class="bg-white p-5 rounded-[1.5rem] shadow-sm flex items-start gap-4">
+                    <div class="bg-gold-primary/10 p-2.5 rounded-xl">
+                        <i class="fas fa-battery-three-quarters text-gold-dark text-lg"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-xs uppercase">Carga Pro + 2 Puertos USB</h4>
+                        <p class="text-[11px] text-slate-500 mt-1">Carga Qi para tu celular y 2 salidas USB extra para
+                            reloj o audífonos.</p>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-white p-5 rounded-[1.5rem] shadow-sm flex items-start gap-4 border border-gold-primary/20">
+                    <div class="bg-gold-primary/10 p-2.5 rounded-xl">
+                        <i class="fas fa-weight-hanging text-gold-dark text-lg"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-xs uppercase">Soporta 1.0kg Reales</h4>
+                        <p class="text-[11px] text-slate-500 mt-1">Usa la parte superior como repisa flotante para
+                            accesorios mientras carga.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-5 rounded-[1.5rem] shadow-sm flex items-start gap-4">
+                    <div class="bg-blue-500/10 p-2.5 rounded-xl">
+                        <i class="fas fa-shipping-fast text-blue-600 text-lg"></i>
+                    </div>
+                    <div>
+                        <div class="badge-shipping mb-1">
+                            <i class="fas fa-star text-[7px]"></i> ENVÍO PRIORITARIO
+                        </div>
+                        <h4 class="font-bold text-xs uppercase">Entrega Veloz en 24h</h4>
+                        <p class="text-[11px] text-slate-500 mt-1">Despachamos hoy mismo. No esperes semanas para
+                            renovar tu espacio.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- OFERTAS CON EFECTO SEÑUELO -->
-    <section id="precios" class="py-16 px-6 max-w-md mx-auto">
-        <div class="text-center mb-10">
-            <h2 class="text-2xl font-black text-slate-800 uppercase tracking-tight">Selecciona tu Pack</h2>
-            <p class="text-slate-400 text-[10px] font-bold uppercase mt-1">Haz clic en tu opción favorita</p>
+    <!-- OFERTAS -->
+    <section id="precios" class="py-12 px-5 max-w-md mx-auto">
+        <div class="text-center mb-8">
+            <h2 class="text-xl font-black text-slate-800 uppercase tracking-tight">Selecciona tu Pack</h2>
+            <p class="text-slate-400 text-[9px] font-bold uppercase mt-1">⚡ ENVÍO VELOZ INCLUIDO ⚡</p>
         </div>
 
-        <div class="space-y-6">
+        <div class="space-y-4">
             <div onclick="selectAndGo('pack1')" id="pack1"
-                class="option-card cursor-pointer p-5 rounded-[2rem] transition-all bg-white/40 border-2 border-slate-200 opacity-60">
+                class="option-card cursor-pointer p-4 rounded-2xl bg-white border border-slate-200 opacity-60">
                 <div class="flex justify-between items-center">
                     <div>
-                        <h3 class="font-bold text-sm text-slate-600">1 Unidad (Personal)</h3>
-                        <p class="text-slate-400 text-[9px] uppercase font-bold">Sin beneficios extra</p>
+                        <h3 class="font-bold text-xs text-slate-600">1 Unidad (Personal)</h3>
+                        <p class="text-slate-400 text-[8px] uppercase font-bold">Básico</p>
                     </div>
                     <div class="text-right">
-                        <div class="text-xl font-black text-slate-500">S/ 89.00</div>
+                        <div class="text-lg font-black text-slate-500">S/ 89.00</div>
                     </div>
                 </div>
             </div>
 
             <div onclick="selectAndGo('pack2')" id="pack2"
-                class="option-card selected cursor-pointer p-7 rounded-[2.5rem] relative transition-all bg-white shadow-xl">
+                class="option-card selected cursor-pointer p-6 rounded-[2rem] relative bg-white shadow-lg border-2 border-gold-primary">
                 <div
-                    class="absolute -top-4 left-1/2 -translate-x-1/2 bg-red-600 text-white text-[10px] font-black px-8 py-1.5 rounded-full uppercase tracking-tighter shadow-lg">
-                    ⭐ RECOMENDADO: TRATO MAESTRO ⭐
+                    class="absolute -top-3 left-1/2 -translate-x-1/2 bg-red-600 text-white text-[9px] font-black px-6 py-1.5 rounded-full uppercase tracking-tighter shadow-md">
+                    🔥 ¡AHORRAS S/ 49.00 HOY! 🔥
                 </div>
                 <div class="flex justify-between items-center">
                     <div>
-                        <h3 class="font-black text-xl text-slate-900 leading-tight">Dúo Luxury (x2)</h3>
-                        <p class="text-green-600 text-[11px] font-bold uppercase mt-1">¡Ahorras S/ 49 Hoy!</p>
+                        <h3 class="font-black text-lg text-slate-900 leading-tight">Dúo Luxury (x2)</h3>
+                        <p class="text-green-600 text-[10px] font-black uppercase mt-0.5">EL MÁS VENDIDO</p>
                         <span
-                            class="text-[10px] bg-gold-primary/10 text-gold-dark px-2 py-1 rounded-md font-bold mt-2 inline-block">S/
+                            class="text-[9px] bg-gold-primary/10 text-gold-dark px-2 py-0.5 rounded-md font-bold mt-1.5 inline-block">S/
                             64.50 c/u</span>
                     </div>
                     <div class="text-right">
-                        <div class="text-3xl font-black text-slate-900">S/ 129.00</div>
-                        <div class="text-xs line-through text-slate-400 font-bold italic">S/ 178.00</div>
+                        <div class="text-2xl font-black text-slate-900">S/ 129.00</div>
+                        <div class="text-[10px] line-through text-slate-400 font-bold italic">S/ 178.00</div>
                     </div>
                 </div>
             </div>
 
             <div onclick="selectAndGo('pack3')" id="pack3"
-                class="option-card cursor-pointer p-6 rounded-[2rem] transition-all bg-white/40 border-2 border-slate-200">
+                class="option-card cursor-pointer p-5 rounded-2xl bg-white border border-slate-200">
                 <div class="flex justify-between items-center">
                     <div>
-                        <h3 class="font-bold text-sm text-slate-700">Pack Familiar (x3)</h3>
-                        <p class="text-gold-dark text-[9px] font-bold uppercase tracking-tight">Precio Mayorista</p>
-                        <span class="text-[10px] text-slate-400 font-bold">S/ 56.30 c/u</span>
+                        <h3 class="font-bold text-xs text-slate-700">Pack Familiar (x3)</h3>
+                        <p class="text-gold-dark text-[8px] font-bold uppercase tracking-tight">Precio Mayorista</p>
                     </div>
                     <div class="text-right">
-                        <div class="text-2xl font-black text-slate-800">S/ 169.00</div>
-                        <p class="text-[9px] text-green-600 font-bold uppercase">Envío Priority</p>
+                        <div class="text-xl font-black text-slate-800">S/ 169.00</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Formulario de Registro -->
-    <section class="section-beige py-12 px-6" id="form-anchor">
+    <!-- Formulario con TODOS los distritos -->
+    <section class="section-beige py-10 px-5" id="form-anchor">
         <div id="form-container"
-            class="bg-white rounded-[2.5rem] p-8 shadow-2xl max-w-md mx-auto border border-gold-primary/10 transition-all">
+            class="bg-white rounded-[2rem] p-6 shadow-xl max-w-md mx-auto border border-gold-primary/10 transition-all">
             <div class="text-center mb-6">
                 <div id="selected-badge"
-                    class="inline-block bg-gold-primary/20 text-gold-dark text-[10px] font-black px-4 py-1 rounded-full uppercase mb-4">
+                    class="inline-block bg-gold-primary/20 text-gold-dark text-[9px] font-black px-4 py-1 rounded-full uppercase mb-3">
                     Pack Seleccionado: Dúo Luxury
                 </div>
-                <h2 class="text-2xl font-black text-slate-800 mb-2 tracking-tight">Agenda tu Envío</h2>
-                <div class="flex justify-center items-center gap-2 text-[10px] font-bold text-red-600 uppercase">
-                    <span class="animate-pulse">●</span> Solo quedan 4 unidades disponibles
-                </div>
+                <h2 class="text-xl font-black text-slate-800 mb-1 tracking-tight">Datos de Entrega</h2>
+                <p class="text-[9px] font-bold text-red-600 uppercase animate-pulse">Solo quedan 4 unidades disponibles
+                </p>
             </div>
 
-            <div class="space-y-4">
+            <div class="space-y-3">
                 <div class="relative">
-                    <i class="fas fa-user absolute left-4 top-1/2 -translate-y-1/2 text-slate-300"></i>
+                    <i class="fas fa-user absolute left-4 top-1/2 -translate-y-1/2 text-slate-300 text-sm"></i>
                     <input type="text" id="nombre" placeholder="Nombre Completo"
-                        class="w-full pl-11 pr-4 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:border-gold-primary outline-none text-sm shadow-inner transition-all">
+                        class="w-full pl-10 pr-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 outline-none text-sm transition-all focus:ring-2 focus:ring-gold-primary/20">
                 </div>
                 <div class="relative">
-                    <i class="fas fa-phone absolute left-4 top-1/2 -translate-y-1/2 text-slate-300"></i>
-                    <input type="tel" id="celular" placeholder="Celular"
-                        class="w-full pl-11 pr-4 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:border-gold-primary outline-none text-sm shadow-inner transition-all">
+                    <i class="fas fa-phone absolute left-4 top-1/2 -translate-y-1/2 text-slate-300 text-sm"></i>
+                    <input type="tel" id="celular" placeholder="Celular (WhatsApp)"
+                        class="w-full pl-10 pr-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 outline-none text-sm transition-all focus:ring-2 focus:ring-gold-primary/20">
                 </div>
                 <div class="relative">
-                    <i class="fas fa-map-marker-alt absolute left-4 top-1/2 -translate-y-1/2 text-slate-300"></i>
-                    <input type="text" id="direccion" placeholder="Dirección de Entrega"
-                        class="w-full pl-11 pr-4 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:border-gold-primary outline-none text-sm shadow-inner transition-all">
+                    <i
+                        class="fas fa-map-marker-alt absolute left-4 top-1/2 -translate-y-1/2 text-slate-300 text-sm"></i>
+                    <input type="text" id="direccion" placeholder="Dirección Exacta"
+                        class="w-full pl-10 pr-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 outline-none text-sm transition-all focus:ring-2 focus:ring-gold-primary/20">
                 </div>
 
                 <select id="distrito"
-                    class="w-full p-4 rounded-2xl bg-slate-50 border border-slate-200 focus:border-gold-primary outline-none text-sm cursor-pointer shadow-inner">
+                    class="w-full p-3.5 rounded-xl bg-slate-50 border border-slate-200 outline-none text-sm cursor-pointer shadow-inner">
                     <option value="">Selecciona tu Distrito...</option>
-                    <optgroup label="Zonas Urbanas">
-                        <option value="Miraflores">Miraflores</option>
-                        <option value="San Isidro">San Isidro</option>
-                        <option value="Surco">Surco</option>
-                        <option value="San Borja">San Borja</option>
-                        <option value="La Molina">La Molina</option>
-                    </optgroup>
-                    <optgroup label="Otros">
-                        <option value="SJL">San Juan de Lurigancho</option>
-                        <option value="SJM">San Juan de Miraflores</option>
-                        <option value="Los Olivos">Los Olivos</option>
-                        <option value="Otros">Otro Distrito...</option>
-                    </optgroup>
+                    <option value="Ancón">Ancón</option>
+                    <option value="Ate">Ate</option>
+                    <option value="Barranco">Barranco</option>
+                    <option value="Breña">Breña</option>
+                    <option value="Carabayllo">Carabayllo</option>
+                    <option value="Chaclacayo">Chaclacayo</option>
+                    <option value="Chorrillos">Chorrillos</option>
+                    <option value="Cieneguilla">Cieneguilla</option>
+                    <option value="Comas">Comas</option>
+                    <option value="El Agustino">El Agustino</option>
+                    <option value="Independencia">Independencia</option>
+                    <option value="Jesús María">Jesús María</option>
+                    <option value="La Molina">La Molina</option>
+                    <option value="La Victoria">La Victoria</option>
+                    <option value="Lima (Cercado)">Lima (Cercado)</option>
+                    <option value="Lince">Lince</option>
+                    <option value="Los Olivos">Los Olivos</option>
+                    <option value="Lurigancho-Chosica">Lurigancho-Chosica</option>
+                    <option value="Lurín">Lurín</option>
+                    <option value="Magdalena del Mar">Magdalena del Mar</option>
+                    <option value="Miraflores">Miraflores</option>
+                    <option value="Pachacámac">Pachacámac</option>
+                    <option value="Pucusana">Pucusana</option>
+                    <option value="Pueblo Libre">Pueblo Libre</option>
+                    <option value="Puente Piedra">Puente Piedra</option>
+                    <option value="Punta Hermosa">Punta Hermosa</option>
+                    <option value="Punta Negra">Punta Negra</option>
+                    <option value="Rímac">Rímac</option>
+                    <option value="San Bartolo">San Bartolo</option>
+                    <option value="San Borja">San Borja</option>
+                    <option value="San Isidro">San Isidro</option>
+                    <option value="San Juan de Lurigancho">San Juan de Lurigancho</option>
+                    <option value="San Juan de Miraflores">San Juan de Miraflores</option>
+                    <option value="San Luis">San Luis</option>
+                    <option value="San Martín de Porres">San Martín de Porres</option>
+                    <option value="San Miguel">San Miguel</option>
+                    <option value="Santa Anita">Santa Anita</option>
+                    <option value="Santa María del Mar">Santa María del Mar</option>
+                    <option value="Santa Rosa">Santa Rosa</option>
+                    <option value="Santiago de Surco">Santiago de Surco</option>
+                    <option value="Surquillo">Surquillo</option>
+                    <option value="Villa El Salvador">Villa El Salvador</option>
+                    <option value="Villa María del Triunfo">Villa María del Triunfo</option>
+                    <option value="Callao (Provincia Constitucional)">Callao (Provincia Const.)</option>
                 </select>
 
-                <button onclick="enviarPedido()"
-                    class="w-full bg-[#25D366] text-white font-black py-5 rounded-2xl text-lg uppercase tracking-widest shadow-lg flex items-center justify-center gap-3 transition-transform active:scale-95 mt-6">
-                    <i class="fab fa-whatsapp text-2xl"></i>
-                    Pedir Contra-Entrega
-                </button>
+                <div class="pt-2">
+                    <button onclick="enviarPedido()"
+                        class="w-full bg-[#25D366] text-white font-black py-4 rounded-xl text-base uppercase tracking-widest shadow-md flex items-center justify-center gap-2 transition-transform active:scale-95">
+                        <i class="fab fa-whatsapp text-xl"></i>
+                        Confirmar Pedido ⚡
+                    </button>
+                </div>
+
+                <div class="flex flex-col items-center gap-1 mt-2">
+                    <p class="text-[8px] text-center text-slate-500 font-bold uppercase tracking-widest">✅ Pagas en
+                        efectivo o tarjeta al recibir</p>
+                    <p class="text-[8px] text-center text-blue-600 font-black uppercase">🚀 Envío Veloz Prioritario</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 px-6 text-center opacity-40">
-        <p class="text-[9px] font-black uppercase tracking-[0.2em]">Lima Express 2025 • Todos los derechos reservados
-        </p>
+    <footer class="py-10 px-5 text-center opacity-40">
+        <p class="text-[8px] font-black uppercase tracking-[0.2em]">Lima Express 2025 • Importación Pro</p>
     </footer>
 
-    <!-- Botón Flotante -->
+    <!-- Botón Flotante Optimizado para Celular -->
     <div id="sticky-buy"
-        class="gold-button rounded-full py-4 px-8 text-center text-white font-black text-xs uppercase tracking-widest shadow-2xl pulse-luxury cursor-pointer"
+        class="gold-button rounded-xl py-4 px-6 text-center text-white font-black text-[11px] uppercase tracking-widest shadow-2xl pulse-luxury cursor-pointer"
         onclick="scrollToElement('form-anchor')">
-        Confirmar Pedido Ahora ⚡
+        ¡PIDE EL TUYO AHORA! ⚡
     </div>
 
     <script>
@@ -370,14 +484,12 @@
             'pack3': { name: 'Pack Familiar x3 (S/ 169.00)', price: '169.00', label: 'Pack Familiar' }
         };
 
-        // Lógica del Slider Dinámica
         let currentSlide = 0;
         const slider = document.getElementById('slider');
         const dotsContainer = document.getElementById('dots');
         const slides = document.querySelectorAll('.slide');
         const totalSlides = slides.length;
 
-        // Crear Dots dinámicamente según número de fotos
         slides.forEach((_, i) => {
             const dot = document.createElement('span');
             dot.classList.add('dot');
@@ -394,16 +506,23 @@
             });
         }
 
-        function nextSlide() {
+        setInterval(() => {
             currentSlide = (currentSlide + 1) % totalSlides;
             updateSlider();
-        }
-
-        // Auto-deslizar cada 4 segundos (más tiempo para ver las 5 fotos)
-        setInterval(nextSlide, 4000);
+        }, 4000);
 
         function scrollToElement(id) {
-            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+            const el = document.getElementById(id);
+            const offset = 80;
+            const bodyRect = document.body.getBoundingClientRect().top;
+            const elementRect = el.getBoundingClientRect().top;
+            const elementPosition = elementRect - bodyRect;
+            const offsetPosition = elementPosition - offset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
         }
 
         function selectAndGo(id) {
@@ -418,19 +537,19 @@
 
         function selectOption(id) {
             document.querySelectorAll('.option-card').forEach(c => {
-                c.classList.remove('selected', 'shadow-xl', 'opacity-100');
-                c.classList.add('bg-white/40', 'border-slate-200', 'opacity-60');
+                c.classList.remove('selected', 'shadow-lg', 'opacity-100', 'border-2', 'border-gold-primary');
+                c.classList.add('bg-white', 'border-slate-200', 'opacity-60');
             });
             const selected = document.getElementById(id);
-            selected.classList.add('selected', 'shadow-xl', 'opacity-100');
-            selected.classList.remove('bg-white/40', 'border-slate-200', 'opacity-60');
+            selected.classList.add('selected', 'shadow-lg', 'opacity-100');
+            selected.classList.remove('opacity-60', 'border-slate-200');
             selectedPack = id;
             document.getElementById('selected-badge').innerText = `Pack Seleccionado: ${packDetails[id].label}`;
         }
 
         window.onscroll = function () {
             const btn = document.getElementById("sticky-buy");
-            if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
+            if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
                 btn.style.display = "block";
             } else {
                 btn.style.display = "none";
@@ -444,21 +563,21 @@
             const dis = document.getElementById('distrito').value;
 
             if (!nom || !cel || !dir || !dis) {
-                alert("⚠️ Por favor completa tus datos para agendar la entrega.");
+                alert("⚠️ Completa tus datos para agendar el Envío Prioritario.");
                 return;
             }
 
             const pack = packDetails[selectedPack];
-            const text = `🚀 *NUEVO PEDIDO WEB - CONFIRMADO* 🚀%0A` +
+            const text = `🚀 *NUEVO PEDIDO WEB - LIMA EXPRESS* 🚀%0A` +
                 `*Pack:* ${pack.name}%0A` +
                 `*Cliente:* ${nom}%0A` +
-                `*Celular:* ${cel}%0A` +
+                `*WhatsApp:* ${cel}%0A` +
                 `*Dirección:* ${dir}%0A` +
                 `*Distrito:* ${dis}%0A` +
                 `--------------------------------%0A` +
                 `*Total:* S/ ${pack.price}%0A` +
-                `*Método:* PAGO CONTRA ENTREGA%0A%0A` +
-                `_Hola! Vengo de la landing y deseo confirmar mi compra hoy mismo._`;
+                `*Pago:* CONTRA ENTREGA%0A%0A` +
+                `_Deseo confirmar mi pedido con envío veloz._`;
 
             window.open(`https://api.whatsapp.com/send?phone=${WSP_NUMBER}&text=${text}`, '_blank');
         }
